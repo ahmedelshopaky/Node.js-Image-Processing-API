@@ -22,8 +22,8 @@ const isImageAvailable = async (query: Metadata) => {
 };
 
 // validate dimensions
-const validate = (width: unknown, height: unknown): boolean => {
-  if (Number.isNaN(width) || Number.isNaN(height)) {
+const validate = (width: number, height: number): boolean => {
+  if (Number.isNaN(width) || Number.isNaN(height) || width < 1 || height < 1) {
     return false;
   }
   return true;
