@@ -13,22 +13,14 @@ const setImage = async (query: Metadata): Promise<string | null> => {
   const width = parseInt(query.width);
   const height = parseInt(query.height);
 
-  const thumbImagePath = path.resolve(
-    thumbDir,
-    `${query.name}-${width}${height}.jpg`
-  );
+  const source = path.resolve(fullDir, `${query.name}.jpg`);
+  const target = path.resolve(thumbDir, `${query.name}-${width}${height}.jpg`);
 
-  const fullImagePath = path.resolve(fullDir, `${query.name}.jpg`);
-  const imageInstance = new ImageEditor(
-    fullImagePath,
-    thumbImagePath,
-    width,
-    height
-  );
+  const imageInstance = new ImageEditor(source, target, width, height);
 
   const saved = await imageInstance.resizeImage();
   if (saved) {
-    return thumbImagePath;
+    return target;
   }
   return null;
 };
